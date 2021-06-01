@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;xilihuasi.github.io&quot;,&quot;root&quot;:&quot;&#x2F;blog&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;blog&#x2F;images&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
+<meta name="description" content="原文地址：How to start with backend TypeScript and use it’s full potential. 原文作者：idchlife 译文出自：掘金翻译计划 本文永久链接：https:&#x2F;&#x2F;github.com&#x2F;xitu&#x2F;gold-miner&#x2F;blob&#x2F;master&#x2F;TODO&#x2F;how-to-start-with-backend-typescript-and-u">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【译】如何用 TypeScript 玩转后端？">
+<meta property="og:url" content="https://xilihuasi.github.io/blog/2017/12/17/2017/%E3%80%90%E8%AF%91%E3%80%91%E5%A6%82%E4%BD%95%E7%94%A8-TypeScript-%E7%8E%A9%E8%BD%AC%E5%90%8E%E7%AB%AF/index.html">
+<meta property="og:site_name" content="xilihuasi&#39;s blog">
+<meta property="og:description" content="原文地址：How to start with backend TypeScript and use it’s full potential. 原文作者：idchlife 译文出自：掘金翻译计划 本文永久链接：https:&#x2F;&#x2F;github.com&#x2F;xitu&#x2F;gold-miner&#x2F;blob&#x2F;master&#x2F;TODO&#x2F;how-to-start-with-backend-typescript-and-u">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/800/1*DdYJb1pIl3JYBfoCQPvSRw.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/800/1*lpTGJEYWTCr18jjm8uAnbg.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/800/1*VJEWGi8ycPxqaLNzjev7nA.png">
+<meta property="article:published_time" content="2017-12-17T22:49:24.000Z">
+<meta property="article:modified_time" content="2021-06-01T15:09:23.812Z">
+<meta property="article:author" content="xilihuasi">
+<meta property="article:tag" content="掘金翻译计划">
+<meta property="article:tag" content="TypeScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn-images-1.medium.com/max/800/1*DdYJb1pIl3JYBfoCQPvSRw.png">
+
+
+<link rel="canonical" href="https://xilihuasi.github.io/blog/2017/12/17/2017/%E3%80%90%E8%AF%91%E3%80%91%E5%A6%82%E4%BD%95%E7%94%A8-TypeScript-%E7%8E%A9%E8%BD%AC%E5%90%8E%E7%AB%AF/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;xilihuasi.github.io&#x2F;blog&#x2F;2017&#x2F;12&#x2F;17&#x2F;2017&#x2F;%E3%80%90%E8%AF%91%E3%80%91%E5%A6%82%E4%BD%95%E7%94%A8-TypeScript-%E7%8E%A9%E8%BD%AC%E5%90%8E%E7%AB%AF&#x2F;&quot;,&quot;path&quot;:&quot;2017&#x2F;12&#x2F;17&#x2F;2017&#x2F;【译】如何用-TypeScript-玩转后端&#x2F;&quot;,&quot;title&quot;:&quot;【译】如何用 TypeScript 玩转后端？&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>【译】如何用 TypeScript 玩转后端？ | xilihuasi's blog</title><script src="/blog/js/config.js"></script>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/blog/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">xilihuasi's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">forerver old, forerver can't cry</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E7%94%A8-TypeScript-%E7%8E%A9%E8%BD%AC%E5%90%8E%E7%AB%AF%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">如何用 TypeScript 玩转后端？</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">xilihuasi</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog/archives">
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/blog/tags/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xilihuasi.github.io/blog/2017/12/17/2017/%E3%80%90%E8%AF%91%E3%80%91%E5%A6%82%E4%BD%95%E7%94%A8-TypeScript-%E7%8E%A9%E8%BD%AC%E5%90%8E%E7%AB%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="xilihuasi">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xilihuasi's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【译】如何用 TypeScript 玩转后端？
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2017-12-17 22:49:24" itemprop="dateCreated datePublished" datetime="2017-12-17T22:49:24+00:00">2017-12-17</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-06-01 15:09:23" itemprop="dateModified" datetime="2021-06-01T15:09:23+00:00">2021-06-01</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/%E6%8E%98%E9%87%91%E7%BF%BB%E8%AF%91%E8%AE%A1%E5%88%92/" itemprop="url" rel="index"><span itemprop="name">掘金翻译计划</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <blockquote>
+<ul>
+<li>原文地址：<a target="_blank" rel="noopener" href="https://medium.com/@igorandreev/how-to-start-with-backend-typescript-and-use-its-full-potential-5114e52012b">How to start with backend TypeScript and use it’s full potential.</a></li>
+<li>原文作者：<a target="_blank" rel="noopener" href="https://medium.com/@igorandreev?source=post_header_lockup">idchlife</a></li>
+<li>译文出自：<a target="_blank" rel="noopener" href="https://github.com/xitu/gold-miner">掘金翻译计划</a></li>
+<li>本文永久链接：<a target="_blank" rel="noopener" href="https://github.com/xitu/gold-miner/blob/master/TODO/how-to-start-with-backend-typescript-and-use-its-full-potential.md">https://github.com/xitu/gold-miner/blob/master/TODO/how-to-start-with-backend-typescript-and-use-its-full-potential.md</a></li>
+<li>译者：<a target="_blank" rel="noopener" href="https://github.com/xilihuasi">xilihuasi</a></li>
+<li>校对者：<a target="_blank" rel="noopener" href="https://github.com/tvChan">tvChan</a>, <a target="_blank" rel="noopener" href="https://github.com/noahziheng">noahziheng</a></li>
+</ul>
+</blockquote>
+<h1 id="如何用-TypeScript-玩转后端？"><a href="#如何用-TypeScript-玩转后端？" class="headerlink" title="如何用 TypeScript 玩转后端？"></a>如何用 TypeScript 玩转后端？</h1><p>我将从一个开发者的角度介绍几个优秀的库。它们可以满足你后端应用的绝大部分特性。装饰器和元数据的能力在这些库中得到的充分的应用，使其非常强大并且简单易用。</p>
+<p>我希望这篇文章可以帮到像我这样，喜欢 TypeScript 而且想用它编写后端代码的人，让他们像我一样发现这些库之后乐在其中。</p>
+<p><strong>TL;DR —— 堆栈使你的后端应用像许多使用其他语言的企业静态解决方案一样强大：</strong></p>
+<ul>
+<li><p>使用装饰器，参数，body 注入的路由和控制器的库</p>
+</li>
+<li><p>依赖注入和使用装饰器的 services 的库</p>
+</li>
+<li><p>使用装饰器的 ORM 就像 Doctrine/Hibernate 那样方便操作实体</p>
+</li>
+<li><p>给那些还不熟悉使用 TypeScript 写后端的朋友的小建议</p>
+</li>
+</ul>
+<p><strong>Routing-controllers：控制器，行为，请求等</strong></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/pleerock/routing-controllers"><strong>pleerock/routing-controllers</strong> routing-controllers —— 创建结构化，声明性和组织良好的基于类的控制器</a></p>
+<p>尽管这个库是作为 Express/Koa 的 TypeScript helper 编写的，它也会对你编写控制器有所帮助，就像你在 Java/PHP/C# 的企业级框架里用到的那样。</p>
+<p>下面是一个控制器的小例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">import &#123;JsonController, Param, Body, Get, Post, Put, Delete&#125; from &quot;routing-controllers&quot;;</span><br><span class="line"></span><br><span class="line">@JsonController()</span><br><span class="line">export class UserController &#123;</span><br><span class="line"></span><br><span class="line">    @Get(&quot;/users&quot;)</span><br><span class="line">    getAll() &#123;</span><br><span class="line">       return userRepository.findAll();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Get(&quot;/users/:id&quot;)</span><br><span class="line">    getOne(@Param(&quot;id&quot;) id: number) &#123;</span><br><span class="line">       return userRepository.findById(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Post(&quot;/users&quot;)</span><br><span class="line">    post(@Body() user: User) &#123;</span><br><span class="line">       return userRepository.insert(user);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这对一些人来说就像是摆脱了噩梦：不再有带路由的组件，充满嵌套的中间件以及具有注入，验证和请求参数的中间件的实现（是的，你甚至可以定义参数类型和是否必传！如 @Body({ required: true, validate: true }) 这种写法将能很好地工作，如果缺少参数或者不正确的请求就会抛出异常）</p>
+<p>装饰器有很多有用的特性，如基础控制器的 @Controller，可在 actions 中定义内容的类型以及使用 @JsonController 服务和接收 JSON。</p>
+<p>我正在 Express 中使用它，既然我们有了 async/await （即使 TS Node.js 开发已经过了好几个月我还是忍不住赞美）我们似乎不再需要 Koa 了（现在 routing-controllers 可以更好的支持 Express ）。而且 Express 有更大的类型集 @types。</p>
+<p>下面是我项目中使用 routing-controllers 和其他 @pleerock 库（VSCode, 如果有兴趣的话，引用来自 TypeLens 插件）的例子：</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*DdYJb1pIl3JYBfoCQPvSRw.png"></p>
+<p>如你所见，routing-controllers 甚至提供了 undefined 返回码（也有 empty 和 null 的装饰器）以及许多其他特性。关于 this.playerService —— 这是另一个迷人的库，稍后我将介绍它。</p>
+<p>总体来看，库有强大的文档，它可以帮助你理解和构建适用于操作甚至整个控制器的自定义中间件的应用程序（这对我来说是个绝妙的时刻）。链接地址如你所见就在那，非常方便。</p>
+<p>当然，你也可以使用很多 Express/Koa 中间件把你的应用抽离出来，以及视图配置（库也有针对视图的装饰器），认证（可以通过中间件应用到整个控制层），错误处理等方面的配置。</p>
+<p>通常我把他们存放在 /controllers 文件夹。</p>
+<p><strong>TypeDI：依赖注入，services</strong></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/pleerock/typedi">https://github.com/pleerock/typedi</a></p>
+<p>这个库帮我定好了项目结构，方便编码并且不用去想「好吧 service 存在哪里，这个是 service？唔或许是另一个，但是，它怎么依赖另一个 service？怎么引用其他 service 唔。」</p>
+<p>回到我的 PlayerService，下面这部分你可以看到它依赖了什么（其他 services）：</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*lpTGJEYWTCr18jjm8uAnbg.png"></p>
+<p>@Inject 对我来说是在处理 services 和逻辑完整的后端应用方面最好用的装饰器。</p>
+<p>（如果你想了解 @OrmEntityManager —— 另一个来自 @pleerock 的库，稍后我将讲解）</p>
+<p>是的，你可以有很多 services 依赖其他的 services。并且如果你有 service 循环依赖，你可以通过明确地定义类型来解决这个问题（库的文档涵盖了大部分的问题和情景）</p>
+<p>对那些不熟悉 services，service 容器，services 依赖注入等的朋友。简要说明：</p>
+<p>你有某种功能，想把它存在类中，然后你想要类的实例并且想让这个类依赖另一个，另一个等。service 容器的依赖注入可以为你保驾护航。你可以从容器中获取 services 并且它会自己处理 services 的所有依赖，给你带有其他实例的工作实例自动注入。</p>
+<p>我关于这个库的描述并不涵盖它的所有潜能（你可以自己查看它的文档——有更多的特性可以使用）：你可以在定义 services 时给它命名，还可以定义构造器注入等。</p>
+<p>通常我把我的 services 存放在 /services 文件夹。</p>
+<p><strong>TypeORM：使用 ORM 定义关系型实体，不同列类型和不同数据存储方案非常方便（关系型，非关系型）</strong></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/typeorm/typeorm"><strong>typeorm/typeorm</strong>_typeorm —— 可在 TypeScript and JavaScript (ES7, ES6, ES5)环境中使用的 Data-Mapper ORM。支持 MySQL, PostgreSQL, MariaDB, SQLite</a></p>
+<p>这给我的感觉就是，用 TypeScript 写 Node.js 最终有能力跟其他语言和 ORMS 竞争。</p>
+<p>强大的 ORM 可以让你很方便地用一种可理解的方式编写实体。我不是其他许多类似这种 Node.js ORMS 的粉丝：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123; id: SomeORM.Integer, name: SomeOrm.String(&#123; …&#125;)&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我总是想让实体写成类。被赋予类型的属性的类，会被带有简单装饰器的 ORM 发现。甚至是没有类型的。</p>
+<p>TypeORM 给你这种能力。我项目中的另一个例子：</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*VJEWGi8ycPxqaLNzjev7nA.png"></p>
+<p>如你所见，我甚至没在装饰器中写属性的类型（你可以这样做，不要担心，明确地定义类型，默认的，可空的等）！TypeORM 为我做了所有这些工作，了解什么类型（感谢 TypeScript 反射：元数据扩展功能）以及把它应用在我的数据库。</p>
+<p>它非常强大，你将拥有所有你在其他 ORMs 中拥有/看到的东西，比如（Doctrine, Hibernate）。</p>
+<p>当使用 routing-controllers 和 TypeDI，它会为你注入实体管理器（就像你在我的 PlayerService 截图中看到的一样）提供非常有用的装饰器或者连接你的控制器和 services（这<strong>非常</strong>方便）。</p>
+<p>这个 ORM 有一个涵盖了大量功能的官方文档，你可以看看并且从中了解所有你开始使用它需要了解的东西。</p>
+<p>我通常把我的数据库配置放在 /config 文件夹，实体放在 /entities 文件夹。</p>
+<ul>
+<li><strong>为什么一篇文章涵盖了所有这些库？</strong></li>
+</ul>
+<p>这正是有趣的部分。</p>
+<p>Routing-controllers 就像是你应用的地基。它给你轻松连接那两个库的可能（涵盖在库文档中）。当然，如果你不想的话可以不用。它可以和任何 ORM 一同使用。</p>
+<p>但是，当你使用全部这三个库时，你会让框架对比其他解决方案时显得太过强大（至少对我来说是这样）。你有控制器，参数注入，body 注入，参数验证，依赖注入，有了这些你可以忘掉手动提供依赖和定义类型，装饰属性的实体，查询 builder。这全都是靠 TypeScript！所以，后端也将有编译时类型检查！</p>
+<ul>
+<li><strong>是的，感谢涵盖了那些功能的库。但是再说一次，如何在 node 中使用 TypeScript？</strong></li>
+</ul>
+<p>好吧，这再简单不过了。你可以像平时一样写 typescript，配置它编译到 ES2015（node 现在有很多特性，不用把它编译成 ES2015 之前的版本了），使用 CommonJS 标准来实现模块即可。</p>
+<p>并且使用 pm2 或其他东西在编译后启动 index/server/app.js 。基本上生产代码已经就绪。不用 ts-node 或者其他什么了。</p>
+<p><strong>如果你喜欢这些库，不要忘了表达你的喜爱</strong></p>
+<p>如你所见，没有很多人知道 routing-controllers 和 TypeDI，这些是我 TypeScript Node.js 项目用到的最强大并且好用的库了。如果你喜欢它们，请花一秒钟 star 它们并且宣传一下。它们帮了我很多，所以我希望它们可以帮到你和其他同样的 TypeScript 使用者！</p>
+<p>这些库也有 gitter 社区，你可以通过谷歌搜索“gitter 库名”很方便地找到它们。</p>
+<p>感谢阅读并且快乐地使用 TypeScript。欢迎评论或提问吧~</p>
+<hr>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/xitu/gold-miner">掘金翻译计划</a> 是一个翻译优质互联网技术文章的社区，文章来源为 <a target="_blank" rel="noopener" href="https://juejin.im/">掘金</a> 上的英文分享文章。内容覆盖 <a target="_blank" rel="noopener" href="https://github.com/xitu/gold-miner#android">Android</a>、<a target="_blank" rel="noopener" href="https://github.com/xitu/gold-miner#ios">iOS</a>、<a target="_blank" rel="noopener" href="https://github.com/xitu/gold-miner#%E5%89%8D%E7%AB%AF">前端</a>、<a target="_blank" rel="noopener" href="https://github.com/xitu/gold-miner#%E5%90%8E%E7%AB%AF">后端</a>、<a target="_blank" rel="noopener" href="https://github.com/xitu/gold-miner#%E5%8C%BA%E5%9D%97%E9%93%BE">区块链</a>、<a target="_blank" rel="noopener" href="https://github.com/xitu/gold-miner#%E4%BA%A7%E5%93%81">产品</a>、<a target="_blank" rel="noopener" href="https://github.com/xitu/gold-miner#%E8%AE%BE%E8%AE%A1">设计</a>、<a target="_blank" rel="noopener" href="https://github.com/xitu/gold-miner#%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD">人工智能</a>等领域，想要查看更多优质译文请持续关注 <a target="_blank" rel="noopener" href="https://github.com/xitu/gold-miner">掘金翻译计划</a>、<a target="_blank" rel="noopener" href="http://weibo.com/juejinfanyi">官方微博</a>、<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/juejinfanyi">知乎专栏</a>。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog/tags/%E6%8E%98%E9%87%91%E7%BF%BB%E8%AF%91%E8%AE%A1%E5%88%92/" rel="tag"># 掘金翻译计划</a>
+              <a href="/blog/tags/TypeScript/" rel="tag"># TypeScript</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blog/2017/03/21/2017/%E3%80%90%E8%AF%91%E3%80%91%E5%88%9B%E5%BB%BA%E5%92%8C%E4%BD%BF%E7%94%A8-WebAssembly-%E7%BB%84%E4%BB%B6/" rel="prev" title="【译】创建和使用 WebAssembly 组件">
+                  <i class="fa fa-chevron-left"></i> 【译】创建和使用 WebAssembly 组件
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blog/2019/04/09/2019/%E3%80%90%E8%AF%91%E3%80%912019-React-Redux-%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/" rel="next" title="【译】2019 React Redux 完全指南">
+                  【译】2019 React Redux 完全指南 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+<script src="/blog/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xilihuasi</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/blog/js/utils.js"></script><script src="/blog/js/motion.js"></script><script src="/blog/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
